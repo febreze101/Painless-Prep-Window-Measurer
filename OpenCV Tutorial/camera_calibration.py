@@ -14,7 +14,7 @@ class CalibrationResult:
     success: bool
 
 class CameraCalibrator:
-    def __init__(self, showPics: bool = True, cal_images_path: Optional[str] = None) -> None:
+    def __init__(self, showPics: bool = False, cal_images_path: Optional[str] = None) -> None:
         """
         Initialize Camera Calibrator
         
@@ -204,15 +204,18 @@ class CameraCalibrator:
             print(f"Error saving calibration: {str(e)}")
 
     def load_calibration(self) -> bool:
-        """Load calibration data from file"""
         try:
             load_path = os.path.join(self.cwd, 'OpenCV Tutorial', 'calibration_data.npz')
             if os.path.exists(load_path):
                 data = np.load(load_path)
+                dist_coeffs = data.get('dist_coeffs')
+                if dist_coeffs is not None:
+                    dist_coeffs = dist_coeffs.reshape(-1)  # Ensure correct shape
+                
                 self.calibration_result = CalibrationResult(
                     camera_matrix=data.get('camera_matrix'),
-                    dist_coeffs=data.get('dist_coeff'),
-                    reprojection_error=0.0,  # Not stored in file
+                    dist_coeffs=dist_coeffs,
+                    reprojection_error=0.0,
                     success=True
                 )
                 return True

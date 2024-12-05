@@ -9,11 +9,10 @@ from typing import Optional, Tuple, List
 
 class WindowMeasurer:
     def __init__(self, calibration_path: str, test_images_path: str):
-        # Constatns
         # Constants
         self.REF_WIDTH = 8.56  # credit card width in cm
         self.REF_HEIGHT = 5.398  # credit card height in cm
-        self.RED = [51, 36, 198]  # BGR format
+        self.RED = [95, 92, 201]  # BGR format
         
         # Paths
         self.cwd = os.getcwd()
@@ -26,6 +25,21 @@ class WindowMeasurer:
             cal_images_path=self.calibration_path
         )
         
+        # self.calibrator.calibrate()
+        
+        # Take a picture
+        # cap = cv2.VideoCapture(0)
+        
+        # # Set resolution
+        # cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+        # cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+        
+        # if cap.isOpened():
+        #     _, frame = cap.read()
+        #     cap.release()
+        #     if _ and frame is not None:
+        #         cv2.imwrite(os.path.join(self.test_imgs_path, 'test_img.jpg'), frame)
+                
         # get test images
         self.test_imgs = [
             os.path.join(self.test_imgs_path, f) 
@@ -129,6 +143,9 @@ class WindowMeasurer:
                 window_width_cm = window_width_px * avg_width_ratio
                 window_height_cm = window_height_px * avg_width_ratio
                 
+                print(f"Window height cm: {window_height_cm:.02f}cm")
+                print(f"Window width cm: {window_width_cm:.02f}cm")
+                
                 # heihgt based calculations
                 height_based_width = window_width_px * avg_height_ratio
                 height_based_height = window_height_px * avg_height_ratio
@@ -183,19 +200,20 @@ class WindowMeasurer:
                 print(f"\nProcessing image {idx + 1}/{len(self.test_imgs)}")
                 
                 # undistort images
-                undistorted = self.calibrator.remove_distortion(img_path)
-                if undistorted is None:
-                    print(f"Failed to undistort image: {img_path}")
-                    continue
+                # undistorted = self.calibrator.remove_distortion(img_path)
+                # if undistorted is None:
+                #     print(f"Failed to undistort image: {img_path}")
+                #     continue
                 
                 # Process frame
-                processed_frame, mask, ref_objects = self.process_frame(undistorted, self.RED)
+                processed_frame, mask, ref_objects = self.process_frame(img_path, self.RED)
                 
                 if processed_frame is not None:
-                    cv2.imshow(f'Measurement {idx + 1}', processed_frame)
-                    key = cv2.waitKey(0)
-                    if key == ord('q'):
-                        break
+                    # cv2.imshow(f'Measurement {idx + 1}', processed_frame)
+                    # key = cv2.waitKey(0)
+                    # if key == ord('q'):
+                    #     break
+                    continue
             
         except Exception as e:
             print(f"Error occured while running measurement: {e}")
@@ -242,7 +260,10 @@ def main():
     # init paths
     cwd = os.getcwd()
     calibration_path = os.path.join(cwd, 'OpenCV Tutorial', 'calibration')
-    test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'test_imgs')
+    # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'test_imgs')
+    # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'west_facing')
+    # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'east_facing')
+    test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'uploads')
 
     # create measurer object
     measurer = WindowMeasurer(
