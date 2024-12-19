@@ -1,97 +1,132 @@
 # Window Measurement Application
 
-A real-time computer vision application that measures window dimensions using a credit card sized reference object. The application uses color detection and computer vision techniques to automatically detect and measure window dimensions in centimeters.
+A computer vision application that measures window dimensions using credit cards as reference objects. The application uses color detection and computer vision techniques to automatically detect and measure window dimensions in centimeters from images.
 
 ## Overview
 
-This application uses your computer's webcam to detect two colored markers (red) placed at opposite corners of a window. By using a credit card's known dimensions as a reference, it calculates and displays the window's actual dimensions in centimeters in real-time.
+This application processes images containing two credit cards (marked in red) placed at different positions on a window. By using the credit cards' known dimensions as references, it calculates and displays the window's actual dimensions in centimeters.
 
 ## Requirements
 
-- Python 3.x
-- OpenCV (cv2)
-- NumPy
-- PIL (Python Imaging Library)
+* Python 3.x
+* OpenCV (cv2)
+* NumPy
+* PIL (Python Imaging Library)
 
 ## Installation
 
 1. Install the required packages:
-```bash
-pip install opencv-python numpy pillow
-```
+   ```bash
+   pip install opencv-python numpy pillow
+   ```
+   or
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-2. Ensure you have a working webcam connected to your computer.
+2. Set up your directory structure:
+   * Create a `calibration` folder for camera calibration images
+   * Create folders for test images (e.g., `test_imgs`, `east_facing`, `west_facing`)
 
 ## How to Use
 
-1. Place colored markers at two opposite corners of the window:
-   - One marker at the upper-left corner
-   - Other marker at the bottom-right corner
-   - The markers should be approximately the size of a credit card
+1. Place credit cards on the window:
+   * One credit card near the top
+   * Another credit card near the bottom
+   * Both cards should be clearly visible in the image
 
-2. Run the application:
-```bash
-python color_detection.py
-```
+2. Organize your images:
+   * Place calibration images in the `calibration` directory
+   * Place test images in your designated test images directory
 
-3. Position yourself so that both markers are clearly visible in the webcam feed.
+3. Run the application:
+   ```python
+   from window_measurer import WindowMeasurer
+
+   measurer = WindowMeasurer(
+       calibration_path='path/to/calibration',
+       test_images_path='path/to/test/images'
+   )
+   measurer.run_measurement()
+   ```
 
 4. The application will:
-   - Detect both colored markers
-   - Draw rectangles around the detected markers
-   - Display the window dimensions in centimeters
-   - Show various processing stages in separate windows
-
-5. Press 'q' to quit the application
+   * Process each image in the test directory
+   * Display color detection masks
+   * Show measurements overlaid on the images
+   * Press 'q' to move to the next image or quit
 
 ## Configuration
 
-You can adjust the following parameters in the code:
+You can adjust the following parameters:
 
-- `REF_WIDTH`: Reference object width (default: 8.56 cm for credit card)
-- `REF_HEIGHT`: Reference object height (default: 5.398 cm for credit card)
-- `min_area`: Minimum area for color detection (default: 3500 pixels)
-- `kernel_size`: Size of kernel for morphological operations (default: 3)
-- Color values for markers (in BGR format):
-  - Red: `[0, 0, 240]`
-  - Green: `[0, 150, 0]`
+* `REF_WIDTH`: Credit card width (default: 8.56 cm)
+* `REF_HEIGHT`: Credit card height (default: 5.398 cm)
+* `min_area`: Minimum area for color detection (default: 3500 pixels)
+* `kernel_size`: Size of kernel for morphological operations (default: 3)
+* Color values in BGR format:
+  * Red: `[95, 92, 201]`
 
 ## Release Notes
 
 ### Current Features
-- Real-time window measurement using webcam feed
-- Color detection for red and green markers
-- Reference object-based measurement calculation
-- Live dimension display in centimeters
-- Noise reduction using morphological operations
-- Visualization of processing stages:
-  - Original color masks
-  - Final processed masks
-  - Detected markers with area values
-  - Window outline with measurements
+
+* Image-based window measurement processing
+* Color detection for reference objects (credit cards)
+* Reference object-based measurement calculation
+* Measurement display in centimeters
+* Noise reduction using morphological operations
+* Camera calibration support
+* Processing stage visualization:
+  * Original masks
+  * Eroded masks
+  * Dilated masks
+  * Opened masks
+  * Closed masks
+  * Final processed image with measurements
 
 ### Working Components
+
 1. **Color Detection System**
-   - Successful detection of red and green markers
-   - Robust noise filtering
-   - Area-based filtering to reduce false positives
+   * Detection of red reference objects
+   * Multiple stages of mask processing
+   * Area-based filtering
+   * Contour detection and processing
 
 2. **Measurement System**
-   - Conversion from pixels to centimeters
-   - Dynamic calculation based on reference object dimensions
-   - Real-time measurement updates
+   * Pixel to centimeter conversion
+   * Ratio-based calculations
+   * Consistency scoring
+   * Detailed measurement diagnostics
 
 ### Known Limitations
-- Requires consistent lighting for reliable color detection
-- Both markers must be visible simultaneously
-- Markers must be approximately credit card sized for accurate measurements
-- Performance may vary based on webcam quality and lighting conditions
+
+* Requires consistent lighting for reliable color detection
+* Both credit cards must be visible in the image
+* Performance depends on image quality and lighting conditions
+* Credit cards must be clearly visible and unobstructed
+
+## Future Improvements
+
+* Implement real-time webcam processing functionality
+* Add support for multiple color markers
+* Develop automatic camera calibration optimization
+* Include error handling for various lighting conditions
+* Add support for different reference object types
+* Implement batch processing with result logging
+* Create a user interface for parameter adjustment
+* Add export functionality for measurement results
+* Implement perspective correction
+* Add support for measuring multiple windows in one image
 
 ## Troubleshooting
 
 If you experience issues with color detection:
-1. Ensure adequate lighting in the room
-2. Check that markers are clearly visible and unobstructed
+
+1. Check image lighting conditions
+2. Verify credit cards are clearly visible
 3. Adjust the color values in the code if needed
 4. Try increasing the `min_area` value if getting false positives
 5. Adjust `kernel_size` for different levels of noise reduction
+6. Check the consistency score in the measurement diagnostics
+7. Verify the calibration images if using camera calibration
