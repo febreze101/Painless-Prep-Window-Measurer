@@ -1,3 +1,9 @@
+"""
+Author: Fabrice Bokovi
+Description: Perform window measurement using color detection of the two reference objects placed on the window.
+Version: 1.0
+"""
+
 import cv2
 import numpy as np
 from utils import get_limits
@@ -206,13 +212,20 @@ class WindowMeasurer:
                 #     continue
                 
                 # Process frame
-                processed_frame, mask, ref_objects = self.process_frame(img_path, self.RED)
+                processed_frame, masks, ref_objects = self.process_frame(img_path, self.RED)
                 
+                # show the masks
+                for mask_key, mask_val in masks.items():
+                    cv2.imshow(mask_key, mask_val)
+                    key = cv2.waitKey(0)
+                    if key == ord('q'):
+                        break
+                    
                 if processed_frame is not None:
-                    # cv2.imshow(f'Measurement {idx + 1}', processed_frame)
-                    # key = cv2.waitKey(0)
-                    # if key == ord('q'):
-                    #     break
+                    cv2.imshow(f'Measurement {idx + 1}', processed_frame)
+                    key = cv2.waitKey(0)
+                    if key == ord('q'):
+                        break
                     continue
             
         except Exception as e:
@@ -262,8 +275,9 @@ def main():
     calibration_path = os.path.join(cwd, 'OpenCV Tutorial', 'calibration')
     # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'test_imgs')
     # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'west_facing')
-    # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'east_facing')
-    test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'uploads')
+    test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'east_facing')
+    # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'east_facing', 'WIN_20241205_13_28_36_Pro.jpg')
+    # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'uploads')
 
     # create measurer object
     measurer = WindowMeasurer(

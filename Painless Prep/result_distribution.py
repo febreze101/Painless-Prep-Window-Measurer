@@ -1,3 +1,9 @@
+"""
+Author: Fabrice Bokovi
+Description: Graphs the results of my measurement test.
+Version: n/a
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 

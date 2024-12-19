@@ -21,14 +21,14 @@ def upload_file():
         return 'File must be PNG', 400
     
     # save the file
-    uploads_dir = 'E:\opencv_practice\OpenCV Tutorial\uploads'
+    uploads_dir = 'uploads'
     os.makedirs(uploads_dir, exist_ok=True)
     file.save(os.path.join(uploads_dir, file.filename))
     
     return 'File uploaded successfully'
 
 
-
+    
 
 
 
