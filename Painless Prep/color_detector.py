@@ -272,10 +272,10 @@ class WindowMeasurer:
 def main():
     # init paths
     cwd = os.getcwd()
-    calibration_path = os.path.join(cwd, 'OpenCV Tutorial', 'calibration')
+    calibration_path = os.path.join(cwd, 'Painless Prep', 'calibration')
     # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'test_imgs')
     # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'west_facing')
-    test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'east_facing')
+    test_images_path = os.path.join(cwd, 'Painless Prep', 'east_facing')
     # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'east_facing', 'WIN_20241205_13_28_36_Pro.jpg')
     # test_images_path = os.path.join(cwd, 'OpenCV Tutorial', 'uploads')
 
