@@ -30,9 +30,9 @@ This application processes images containing two credit cards (marked in red) pl
 
 ## How to Use
 
-1. Place credit cards on the window:
-   * One credit card near the top
-   * Another credit card near the bottom
+1. Place credit card shaped reference items on the window:
+   * One in the top left
+   * Another in the bottom left
    * Both cards should be clearly visible in the image
 
 2. Organize your images:
@@ -49,6 +49,7 @@ This application processes images containing two credit cards (marked in red) pl
    )
    measurer.run_measurement()
    ```
+This is all in the `color_detector.py` file.
 
 4. The application will:
    * Process each image in the test directory
