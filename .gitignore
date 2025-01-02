@@ -2,9 +2,9 @@ vids/
 checkpoints/
 
 *.jpg
-!east_facing/*.jpg
-!calibration/*.jpg
-!west_facing/*.jpg
+!Painless Prep/east_facing/*.jpg
+!Painless Prep/calibration/*.jpg
+!Painless Prep/west_facing/*.jpg
 *.png
 *.zip
 *.pyc
