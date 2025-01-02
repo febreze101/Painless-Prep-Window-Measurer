@@ -2,6 +2,9 @@ vids/
 checkpoints/
 
 *.jpg
+!east_facing/*.jpg
+!calibration/*.jpg
+!west_facing/*.jpg
 *.png
 *.zip
 *.pyc
