@@ -103,7 +103,6 @@ You can adjust the following parameters:
 ### Test Results
 ![east_facing_measurements](https://github.com/user-attachments/assets/3f32afc0-d8c7-4f45-bedf-b0d681de0783)
 ![Figure_1](https://github.com/user-attachments/assets/78e3c037-cb9f-49de-90b0-0e1cc06561db)
-![office_measurements](https://github.com/user-attachments/assets/3165e6cd-2df3-48ba-af99-82f11a6ac7aa)
 ![west_facing_measurements](https://github.com/user-attachments/assets/7a22daa9-e95a-4298-a0b8-c87a65820148)
 
 ### Known Limitations
