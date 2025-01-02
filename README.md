@@ -5,6 +5,7 @@ A computer vision application that measures window dimensions using credit cards
 ## Overview
 
 This application processes images containing two credit cards (marked in red) placed at different positions on a window. By using the credit cards' known dimensions as references, it calculates and displays the window's actual dimensions in centimeters.
+![good_width](https://github.com/user-attachments/assets/e8b30e07-48b9-4554-aef4-796249805aa3)
 
 ## Requirements
 
@@ -101,9 +102,12 @@ You can adjust the following parameters:
    * Detailed measurement diagnostics
   
 ### Test Results
+Pictures were taken in different locations around the house and ran through the program. The point was to see a distribution of the results in real world scenarios and measure how close we could get to real world measurements. 
+
 ![east_facing_measurements](https://github.com/user-attachments/assets/3f32afc0-d8c7-4f45-bedf-b0d681de0783)
 ![Figure_1](https://github.com/user-attachments/assets/78e3c037-cb9f-49de-90b0-0e1cc06561db)
 ![west_facing_measurements](https://github.com/user-attachments/assets/7a22daa9-e95a-4298-a0b8-c87a65820148)
+
 
 ### Known Limitations
 
