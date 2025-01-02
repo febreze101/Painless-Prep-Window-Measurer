@@ -1,5 +1,6 @@
 vids/
 checkpoints/
+Cascades/
 
 *.jpg
 !Painless Prep/east_facing/*.jpg
